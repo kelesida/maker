@@ -1,7 +1,7 @@
 {
   "name":"kelesida/maker",
   "type":"project",
-  "license":"GNU",
+  "license":"MIT",
   "description":"Coding generation system",
   "authors": {
     "name": ["Maxim"],
