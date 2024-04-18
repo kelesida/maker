@@ -4,8 +4,8 @@
   "license":"GNU",
   "description":"Coding generation system",
   "authors": {
-    "name": "Maxim",
-    "email": "maxim.b.lebedev@gmail.com"
+    "name": ["Maxim"],
+    "email": ["maxim.b.lebedev@gmail.com"]
   },
   "require": {
     "php": ">=5.5.0"
