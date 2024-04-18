@@ -1,0 +1,18 @@
+{
+  "name":"kelesida/maker",
+  "type":"project",
+  "license":"GNU",
+  "description":"Coding generation system",
+  "authors": {
+    "name": "Maxim",
+    "email": "maxim.b.lebedev@gmail.com"
+  },
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "kelesida\\maker\\": "src/kelesida/maker"
+    }
+  }
+}
