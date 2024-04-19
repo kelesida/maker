@@ -1,0 +1,38 @@
+$(document).on('mouseover', '.note__show-container pre, .note__show-container p', function() {
+    const coords = this.getBoundingClientRect();
+    const container = $('.note__tool-container')[0];
+
+    if (coords.top) {
+        container.style.top = coords.top + 'px';
+        container.style.left = coords.left + 400 + 'px';
+    }
+    $(container).find('.note__tool-button__play').attr('cmd', this.innerText);
+    $(container).find('label').text(this.innerText);
+    $(container).show();
+});
+
+$(document).on('mouseleave', '.note__tool-container', function() {
+    $('.note__tool-container').hide();
+});
+
+$(document).on('click', '.note__tool-button__play', function() {
+    $('.note__tool-container').hide();
+    let command = $(this).attr('cmd');
+
+    doajaxpost('/tool/does', 'command=' + command, function(res) {
+        const toolResult = $('.tool-result .ibox-content')[0];
+        const toolTitle = $('.tool-result .ibox-title h5')[0];
+
+        $(toolTitle).text(command);
+        $(toolResult).html(res.output);
+    });
+});
+$(document).on('click', '.note__tool-button__save', function() {
+    let title = $(this).closest('.ibox').find('.ibox-title h5').text();
+    let content = $(this).closest('.ibox').find('.ibox-content').html();
+    let parentId = $('.note__show-ibox').data('id');
+
+    doajaxpost('/tool/save/'+parentId, "title=" + title +"&content=" + content, function(res) {
+        toastr.success('Успешно', 'Контент сохранен');
+    });
+});

@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Проект{% endblock %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    {% set url = 'phpstorm://open?url=file://D:/OpenServer/Domains/creator.lo/' %}
+<div class="ibox ">
+    <div class="ibox-title">
+        <h5>Components of project</h5>
+
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#" class="dropdown-item">Config option 1</a>
+                </li>
+                <li><a href="#" class="dropdown-item">Config option 2</a>
+                </li>
+            </ul>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="tabs-container">
+            <div class="tabs-left">
+                <ul class="nav nav-tabs">
+                {% for item in componentGroups[activeComponent] %}
+                    <li><a class="nav-link{% if loop.index == 1 %} active{% endif %}" data-toggle="tab" href="#tab-{{ loop.index }}"> {{ item.basename }}</a></li>
+                {% endfor %}
+                    <li><a class="nav-link" data-toggle="tab" href="#tab-0"> <i class="fa fa-plus"></i></a></li>
+                </ul>
+                <div class="tab-content ">
+                    {% for item in componentGroups[activeComponent] %}
+                    <div id="tab-{{ loop.index }}" class="tab-pane{% if loop.index == 1 %} active{% endif %}">
+                        <div class="panel-body">
+                            <strong><a href="{{ url ~ item.path|replace({'/app/': ''}) }}&line=1">{{ item.basename }}</a></strong>
+                            <table class="footable table table-stripped toggle-arrow-tiny">
+                                <thead>
+                                <tr>
+                                    <th data-toggle="true">Name</th>
+                                    <th data-type="numeric">Modifier</th>
+                                    <th data-hide="all">Return Type</th>
+                                    <th data-hide="all">__toString</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for method in item.reflectionClass.methods %}
+                                <tr>
+                                    <td>{{ method.name }}</td>
+                                    <td>{{ method.modifier }}</td>
+                                    <td>{{ method.returnType }}</td>
+                                    <td><pre>{{ method.toString }}</pre></td>
+                                    <td>
+                                        <a href="{{ url ~ item.path|replace({'/app/': ''}) }}&line={{ method.line }}">
+                                            <i class="fa fa-edit text-navy"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination float-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div id="tab-0" class="tab-pane">
+                        Создание
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts_footer %}
+<script>
+$(document).ready(function() {
+    $('.footable').footable();
+});
+</script>
+{% endblock %}

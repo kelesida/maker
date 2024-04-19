@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project src="/var/www/html" pocket="Symfony" ver="^4">
+  <item tag="t1-2_244">
+    <transform>
+      <var type="json" name="variable1">
+        {
+          "accessId":"Request",
+          "data":{
+            "outputAddress":"14BWH6GmVoL5nTwbVxQJKJDtzv4y5EbTVm",
+            "depositId":"123",
+            "currency":"BTC",
+            "transactionHash":"hash",
+            "address":"addresstest"
+          },
+          "replyTo":{
+            "name":"request",
+            "method":"deposit",
+            "key":"updateDeposit"
+          },
+          "token":"46e29bf731d6c1619f7397f716acf6dce0648986d908c053766fe2dbb1061d12f90ca75511940508721ae2e7dee549646179e7133eb3748ff1aa1313fe840685:3276e4acf3444ce4e47676"
+        }
+      </var>
+      <var type="object" name="variable2"></var>
+      <var type="default" name="variable3">Пример текста</var>
+    </transform>
+    <content type="php">
+
+/**
+/* Example
+*/
+public function create() {
+
+}
+
+    </content>
+  </item>
+  <items tag="t1-2">
+
+  </items>
+</project>
